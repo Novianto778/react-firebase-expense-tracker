@@ -1,5 +1,6 @@
 import React from "react";
 import CategoriesItem from "./CategoriesItem";
+
 const DATA = [
   { id: 1, category: "Electric Bill", count: 1, total: 760000 },
   { id: 2, category: "Food", count: 2, total: 200000 },
@@ -7,7 +8,7 @@ const DATA = [
 ];
 const Sidebar = () => {
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full fixed">
       <div className="pt-20 px-8">
         <h2 className="text-2xl font-semibold mb-6">Categories</h2>
         {DATA.map((expense) => (
