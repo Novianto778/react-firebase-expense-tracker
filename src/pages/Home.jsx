@@ -34,7 +34,7 @@ const Home = () => {
           )}
         </div>
       </div>
-      <div className="col-span-1 bg-white">
+      <div className="col-span-1 bg-white relative h-screen w-full">
         <Sidebar />
       </div>
     </div>

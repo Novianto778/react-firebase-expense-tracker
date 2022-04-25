@@ -22,7 +22,7 @@ const AddExpenses = () => {
       addDoc(expensesRef, {
         title,
         content: detail,
-        total,
+        total: +total,
         categoryId,
         dateCreated: serverTimestamp(),
       }).then(() => {

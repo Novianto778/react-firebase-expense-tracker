@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useExpenseCategories from "../hooks/use-expense-categories";
 import CategoriesItem from "./CategoriesItem";
 
 const DATA = [
@@ -7,11 +8,35 @@ const DATA = [
   { id: 3, category: "Clothes", count: 1, total: 120000 },
 ];
 const Sidebar = () => {
+  const [expensePerCategory, setExpensePerCategory] = useState([]);
+  const { expensesCategories } = useExpenseCategories();
+  useEffect(() => {
+    const existExpense = [];
+    expensesCategories.forEach((item) => {
+      const existExpenseIndex = existExpense.findIndex(
+        (exp) => exp.category === item.expenseCtg
+      );
+      if (existExpenseIndex < 0) {
+        existExpense.push({
+          id: item.categoryId,
+          category: item.expenseCtg,
+          count: 1,
+          total: item.total,
+        });
+      } else {
+        const expExist = existExpense[existExpenseIndex];
+        expExist.count++;
+        expExist.total += item.total;
+      }
+    });
+    setExpensePerCategory(existExpense);
+  }, [expensesCategories]);
+
   return (
-    <div className="w-full h-full fixed">
+    <div className="top-0 right-0 left-0 bottom-0 h-full absolute">
       <div className="pt-20 px-8">
         <h2 className="text-2xl font-semibold mb-6">Categories</h2>
-        {DATA.map((expense) => (
+        {expensePerCategory.map((expense) => (
           <CategoriesItem key={expense.id} expense={expense} />
         ))}
       </div>
