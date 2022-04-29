@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import useExpenseCategories from "../hooks/use-expense-categories";
 import CategoriesItem from "./CategoriesItem";
 
-const DATA = [
-  { id: 1, category: "Electric Bill", count: 1, total: 760000 },
-  { id: 2, category: "Food", count: 2, total: 200000 },
-  { id: 3, category: "Clothes", count: 1, total: 120000 },
-];
-const Sidebar = () => {
+// const DATA = [
+//   { id: 1, category: "Electric Bill", count: 1, total: 760000 },
+//   { id: 2, category: "Food", count: 2, total: 200000 },
+//   { id: 3, category: "Clothes", count: 1, total: 120000 },
+// ];
+const Sidebar = ({ handleShowModal }) => {
   const [expensePerCategory, setExpensePerCategory] = useState([]);
   const { expensesCategories } = useExpenseCategories();
+  console.log(expensesCategories)
   useEffect(() => {
     const existExpense = [];
     expensesCategories.forEach((item) => {
@@ -33,7 +34,7 @@ const Sidebar = () => {
   }, [expensesCategories]);
 
   return (
-    <div className="top-0 right-0 left-0 bottom-0 h-full absolute">
+    <div className="h-full fixed w-96">
       <div className="pt-20 px-8">
         <h2 className="text-2xl font-semibold mb-6">Categories</h2>
         {expensePerCategory.map((expense) => (
@@ -41,7 +42,10 @@ const Sidebar = () => {
         ))}
       </div>
       <div className="px-8 absolute bottom-8">
-        <button className="text-lg font-semibold text-blue-600">
+        <button
+          className="text-lg font-semibold text-blue-600"
+          onClick={handleShowModal}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 inline align-text-top mr-2"
