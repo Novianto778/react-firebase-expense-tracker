@@ -10,7 +10,6 @@ import CategoriesItem from "./CategoriesItem";
 const Sidebar = ({ handleShowModal }) => {
   const [expensePerCategory, setExpensePerCategory] = useState([]);
   const { expensesCategories } = useExpenseCategories();
-  console.log(expensesCategories)
   useEffect(() => {
     const existExpense = [];
     expensesCategories.forEach((item) => {

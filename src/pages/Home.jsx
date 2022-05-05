@@ -1,9 +1,11 @@
+import '../wdyr'
 import React, { useState } from "react";
 import CategoriesNav from "../components/CategoriesNav";
 import ExpenseCard from "../components/ExpenseCard";
 import Modal from "../components/Modal";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import { useExpenses } from "../context/expenses-context";
 import useExpenseCategories from "../hooks/use-expense-categories";
 
 const Home = () => {
@@ -13,6 +15,10 @@ const Home = () => {
   const filteredExpenses = expensesCategories.filter((card) => {
     return expCategory ? card.expenseCtg === expCategory : true;
   });
+
+  // const { expenses } = useExpenses();
+  // console.log(expenses);
+  // console.log('render')
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -53,3 +59,5 @@ const Home = () => {
 };
 
 export default Home;
+
+// Home.whyDidYouRender = true

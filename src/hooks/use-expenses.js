@@ -18,5 +18,4 @@ const useExpenses = () => {
   }, []);
   return { expenses };
 };
-
 export default useExpenses;

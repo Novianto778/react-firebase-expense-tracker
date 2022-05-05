@@ -1,22 +1,28 @@
 import { useState, useEffect } from "react";
-import useCategories from "./use-categories";
-import useExpenses from "./use-expenses";
+import { useCategories } from "../context/categories-context";
+import { useExpenses } from "../context/expenses-context";
 
-const useExpenseCategories = () => {
+const useExpenseCategories = (id) => {
   const [expensesCategories, setExpensesCategories] = useState([]);
   const { categories } = useCategories();
-  const { expenses } = useExpenses();
+  const { expenses } = useExpenses(id);
   useEffect(() => {
-    const array = expenses.map((expense) => {
-      const expenseCategory = categories.find(
-        (ctg) => ctg.id === expense.categoryId
-      );
-      if (expense.categoryId === expenseCategory.id) {
-        return { ...expense, expenseCtg: expenseCategory.name };
-      }
-    });
-    setExpensesCategories(array);
+    function getExpensesCategories(id) {
+      const array = expenses.map((expense) => {
+        const expenseCategory = categories.find(
+          (ctg) => ctg.id === expense.categoryId
+        );
+        if (expense.categoryId === expenseCategory.id) {
+          return { ...expense, expenseCtg: expenseCategory.name };
+        }
+      });
+      setExpensesCategories(array);
+    }
+    getExpensesCategories(id);
+
+    return () => getExpensesCategories(id);
   }, [categories, expenses]);
+
   return { expensesCategories };
 };
 

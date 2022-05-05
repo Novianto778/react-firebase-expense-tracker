@@ -1,7 +1,7 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import useCategories from "../hooks/use-categories";
+import { useCategories } from "../context/categories-context";
 
 const CategoriesNav = ({ setExpCategory, expCategory }) => {
   const { categories } = useCategories();
